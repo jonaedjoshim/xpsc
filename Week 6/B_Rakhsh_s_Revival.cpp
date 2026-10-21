@@ -11,34 +11,52 @@ int main()
 
     while (t--)
     {
-        int n, m, k;
-        cin >> n >> m >> k;
-        string s;
-        cin >> s;
+        int n;
+        cin >> n;
+        string row0, row1;
+        cin >> row0 >> row1;
 
-        int operations = 0;
-        int cnt = 0;
+        int answer = 0;
 
         for (int i = 0; i < n; i++)
         {
-            if (s[i] == '0')
+            if (row0[i] == '.' && row1[i] == '.')
             {
-                cnt++;
-            }
-            else
-            {
-                cnt = 0;
-            }
+                row0[i] = 'x';
+                row1[i] = 'x';
 
-            if (cnt == m)
-            {
-                operations++;
-                i = min(i + k - 1, n - 1);
-                cnt = 0;
+                int left_connected = 0;
+                int right_connected = 0;
+
+                for (int j = 0; j < i; j++)
+                {
+                    if ((row0[j] == '.' && row0[j + 1] == '.') || (row1[j] == '.' && row1[j + 1] == '.') || (row0[j] == '.' && row1[j] == '.'))
+                    {
+                        left_connected = 1;
+                        break;
+                    }
+                }
+
+                for (int j = i + 1; j < n; j++)
+                {
+                    if ((row0[j] == '.' && row0[j + 1] == '.') || (row1[j] == '.' && row1[j + 1] == '.') || (row0[j] == '.' && row1[j] == '.'))
+                    {
+                        right_connected = 1;
+                        break;
+                    }
+                }
+
+                if (left_connected && right_connected)
+                {
+                    answer++;
+                }
+
+                row0[i] = '.';
+                row1[i] = '.';
             }
         }
 
-        cout << operations << '\n';
+        cout << answer << '\n';
     }
 
     return 0;
