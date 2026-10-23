@@ -7,35 +7,40 @@ int main()
     cin.tie(nullptr);
 
     int n;
-    long long k;
-    cin >> n >> k;
+    long long s;
+    cin >> n >> s;
 
-    vector<int> a(n);
-
+    vector<long long> a(n);
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
 
-    int left = 0, right = 0, ans = 0;
+    int left = 0;
+    int right = 0;
+    int ans = 0;
     long long sum = 0;
 
     while (right < n)
     {
         sum += a[right];
 
-        if (sum <= k)
-        {
-            ans = max(ans, right - left + 1);
-        }
-        else
+        while (sum > s)
         {
             sum -= a[left];
             left++;
         }
+
+        int len = right - left + 1;
+        if (len > ans)
+        {
+            ans = len;
+        }
+
         right++;
     }
-    cout << ans << endl;
+
+    cout << ans << '\n';
 
     return 0;
 }

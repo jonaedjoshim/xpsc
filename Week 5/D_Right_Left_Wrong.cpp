@@ -20,8 +20,8 @@ int main()
             cin >> a[i];
         }
 
-        string s;
-        cin >> s;
+        string str;
+        cin >> str;
 
         vector<long long> pref(n + 1, 0);
         for (int i = 0; i < n; i++)
@@ -35,11 +35,11 @@ int main()
 
         while (left < right)
         {
-            while (left < right && s[left] != 'L')
+            while (left < right && str[left] != 'L')
             {
                 left++;
             }
-            while (left < right && s[right] != 'R')
+            while (left < right && str[right] != 'R')
             {
                 right--;
             }
